@@ -1,39 +1,33 @@
 <template>
-  <div class="home">
-    <div class="home">
-      <img alt="Vue logo" src="../assets/logo.png" />
-
-      <!-- Check that the SDK client is not currently loading before accessing is methods -->
-      <div v-if="!$auth.loading">
-        <!-- show login when not authenticated -->
-        <button v-if="!$auth.isAuthenticated" @click="login">Log in</button>
-        <!-- show logout when authenticated -->
-        <button v-if="$auth.isAuthenticated" @click="logout">Log out</button>
+<div class="home">
+  <section class="hero is-dark">
+    <div class="hero-body">
+      <div class="container">
+        <h1 class="title">
+          Giphy Search       
+        </h1>
+        <h2 class="subtitle">
+          Log in to search for Gifs
+        </h2>
+        <div class="button-block">
+            <button v-if="!$auth.isAuthenticated" @click="login" class="button is-xl is-dark">Sign Up to browse Gifs</button>
+            <h3 v-if="$auth.isAuthenticated" class="is-size-3 has-background-dark welcome">Welcome, {{ $auth.user.name }}!</h3>
+        </div>
       </div>
     </div>
-    <GiphySearch msg="Welcome to Your Vue.js App"/>
-  </div>
+  </section>
+</div>
 </template>
 
 <script>
 // @ is an alias to /src
 
-import GiphySearch from "@/components/GiphySearch";
 export default {
   name: "home",
-  components: {
-    GiphySearch
-  },
   methods: {
     // Log the user in
     login() {
       this.$auth.loginWithRedirect();
-    },
-    // Log the user out
-    logout() {
-      this.$auth.logout({
-        returnTo: window.location.origin
-      });
     }
   }
 };

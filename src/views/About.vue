@@ -1,5 +1,40 @@
 <template>
-  <div class="about">
-    <h1>This is an about page</h1>
-  </div>
+<div class="about">
+  <section class="hero is-dark">
+    <div class="hero-body">
+      <div class="container">
+        <h1 class="title">
+          GiphySearch       
+        </h1>
+        <h2 class="subtitle">
+          Log in to search for Gifs
+        </h2>
+        <div class="button-block">
+            <button v-if="!$auth.isAuthenticated" @click="login" class="button is-xl is-dark">Sign Up to browse Gifs</button>
+            <h3 v-if="$auth.isAuthenticated" class="is-size-3 has-background-dark welcome">Welcome, {{ $auth.user.name }}!</h3>
+        </div>
+      </div>
+    </div>
+    <GiphySearch msg="Welcome to Your Vue.js App"/>
+
+  </section>
+</div>
 </template>
+
+<script>
+// @ is an alias to /src
+
+import GiphySearch from "@/components/GiphySearch";
+export default {
+  name: "about",
+  components: {
+    GiphySearch
+  },
+  methods: {
+    // Log the user in
+    login() {
+      this.$auth.loginWithRedirect();
+    }
+  }
+};
+</script>

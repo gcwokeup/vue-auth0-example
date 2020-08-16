@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <Nav />
     <div id="nav">
       <router-link to="/">Home</router-link>
       <router-link v-if="$auth.isAuthenticated" to="/profile">Profile</router-link>
@@ -7,6 +8,16 @@
     <router-view/>
   </div>
 </template>
+
+<script>
+import Nav from './components/partials/Nav.vue';
+export default {
+  name: 'app',
+  components: {
+    Nav
+  }
+}
+</script>
 
 <style>
 #app {
